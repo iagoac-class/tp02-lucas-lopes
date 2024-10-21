@@ -1,3 +1,9 @@
+/*
+GRUPO:
+    - Lucas Lopes Baroni (2024.1.08.017)
+    - Renan Catini Amaral (2024.1.08.---)
+*/
+
 #ifndef _H_ARVORES
 #define _H_ARVORES
 
