@@ -17,7 +17,6 @@ no_def* root_def = NULL;
 
 double arvore_binaria(int instancia_num) {
     double tempo = 0;
-    clock_t begin = clock();
 
     // 1. Transformando a variável inteira @instancia_num em string
 
@@ -38,27 +37,28 @@ double arvore_binaria(int instancia_num) {
     // 4. Lendo o arquivo e executando as operações presentes nele
 
     while(fscanf(readFile, "%c %d", &readOperation, &readValue) != EOF){
+        clock_t begin, end;
         switch (readOperation){
             case 'I':
+                begin = clock();
                 root_def = addEl_DefTree(root_def, createEl_DefTree(readValue));
+                end = clock();
                 break;
             case 'R':
+                begin = clock();
                 root_def = removeEl_DefTree(root_def, readValue);
+                end = clock();
                 break;
         }
+        tempo += (double)(end - begin) / CLOCKS_PER_SEC;
     }
+    
     fclose(readFile);
-
-    clock_t end = clock();
-    // calcula o tempo decorrido encontrando a diferença (end - begin) e
-    // dividindo a diferença por CLOCKS_PER_SEC para converter em segundos
-    tempo += (double)(end - begin) / CLOCKS_PER_SEC;
     return (tempo);
 }
 
 double arvore_balanceada(int instancia_num) {
     double tempo = 0;
-    clock_t begin = clock();
 
     // 1. Transformando a variável inteira @instancia_num em string
 
@@ -79,22 +79,23 @@ double arvore_balanceada(int instancia_num) {
     // 4. Lendo o arquivo e executando as operações presentes nele
 
     while(fscanf(readFile, "%c %d", &readOperation, &readValue) != EOF){
+        clock_t begin, end;
         switch (readOperation){
             case 'I':
+                begin = clock();
                 root_avl = addEl_AVLTree(root_avl, readValue);
+                end = clock();
                 break;
             case 'R':
+                begin = clock();
                 root_avl = removeEl_AVLTree(root_avl, readValue);
+                end = clock();
                 break;
         }
+        tempo += (double)(end - begin) / CLOCKS_PER_SEC;
     }
 
     fclose(readFile);
-    
-    clock_t end = clock();
-    // calcula o tempo decorrido encontrando a diferença (end - begin) e
-    // dividindo a diferença por CLOCKS_PER_SEC para converter em segundos
-    tempo += (double)(end - begin) / CLOCKS_PER_SEC;
     return (tempo);
 }
 
